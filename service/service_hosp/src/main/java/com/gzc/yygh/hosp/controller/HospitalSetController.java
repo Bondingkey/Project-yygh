@@ -2,8 +2,6 @@ package com.gzc.yygh.hosp.controller;
 
 import com.gzc.yygh.hosp.service.HospitalSetService;
 import com.gzc.yygh.model.hosp.HospitalSet;
-import org.apache.ibatis.annotations.Param;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

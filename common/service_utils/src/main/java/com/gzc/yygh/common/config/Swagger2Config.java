@@ -26,7 +26,9 @@ public class Swagger2Config {
     2,编写一个配置类,标注@EnableSwagger2用来添加Swagger2支持
     3,在配置类中编写一个返回Docket的方法,并在改方法中设置一系列属性配置,一个这样的方法对应一个分组
     4,将方法添加@Bean标签放入Spring容器
-    5,在想要使用Swagger2的微服务的启动类上添加@ComponentScan("com.gzc.yygh")注解,指定微服务和配置类的所在目录的相同部分
+    5,在想要使用的微服务的pom.xml文件中引入当前配置类所在的模块的项目依赖
+    6,在想要使用Swagger2的微服务的启动类上添加@ComponentScan("com.gzc.yygh")注解,指定微服务和配置类的所在目录的相同部分
+    7,启动启动类,访问链接http://localhost:引用Swagger2的微服务端口号/swagger-ui.html
      */
 
     //提供一个Docket对象

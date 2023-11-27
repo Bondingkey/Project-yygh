@@ -14,9 +14,9 @@ spring:
   #mysql数据库连接
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: GUAN0310
     url: jdbc:mysql://localhost:3306/yygh_hosp?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
+    password: GUAN0310
   #返回json的全局时间格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

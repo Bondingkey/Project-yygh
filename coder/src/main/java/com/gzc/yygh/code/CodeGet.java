@@ -18,6 +18,13 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class CodeGet {
 
     public static void main(String[] args) {
+        /*
+        mp代码生成器步骤:
+        1,导入依赖
+        2,编写代码生成器的类
+        3,在该类的方法中修改要进行生成的一系列信息:生成路径,参照表格,数据库配置,生成包名等
+        4,执行main方法
+         */
 
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
