@@ -15,13 +15,13 @@ import lombok.Data;
  * @author qy
  */
 @Data
-@ApiModel(description = "医院设置")
+@ApiModel(description = "医院设置") //用来在Swagger中对pojo类做说明
 @TableName("hospital_set")
 public class HospitalSet extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "医院名称")
+	@ApiModelProperty(value = "医院名称") //在Swagger中对对象的属性做说明
 	@TableField("hosname")
 	private String hosname;
 
