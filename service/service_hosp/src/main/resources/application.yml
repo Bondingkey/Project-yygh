@@ -24,3 +24,7 @@ spring:
   #环境设置：dev、test、prod
   profiles:
     active: dev
+#mongodb数据库链接
+  data:
+    mongodb:
+      uri: mongodb://192.168.150.100:27017/test

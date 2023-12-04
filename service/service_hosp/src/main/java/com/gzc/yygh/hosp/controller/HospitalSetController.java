@@ -2,7 +2,6 @@ package com.gzc.yygh.hosp.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.gzc.yygh.common.error.YyghError;
 import com.gzc.yygh.common.result.R;
 import com.gzc.yygh.hosp.service.HospitalSetService;
 import com.gzc.yygh.common.utils.MD5;
@@ -11,13 +10,11 @@ import com.gzc.yygh.vo.hosp.HospitalSetQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,10 +26,11 @@ import java.util.Random;
  * @author gzc
  * @since 2023-11-27
  */
-@RestController//添加了该属性代表该类中的所有方法返回的都是json
+@RestController //添加了该属性代表该类中的所有方法返回的都是json
 @Api(tags = "医院设置信息微服务") //当前微服务在Swagger中的说明信息
 @RequestMapping("/admin/hosp/hospitalSet")
-@Slf4j //标注日志级别
+@Slf4j        //标注日志级别
+@CrossOrigin  //局部解决跨域问题
 public class HospitalSetController {
 
     @Autowired
@@ -85,7 +83,7 @@ public class HospitalSetController {
     @PostMapping("/findPage/{pageNum}/{size}")//接受前端传过来的分页查询信息,如果使用了@RequestBody则不能使用Get请求
     public R findPage(@ApiParam(name = "pageNum",value = "当前页") @PathVariable("pageNum") Integer pageNum,
                       @ApiParam(name = "size",value = "条数") @PathVariable("size") Integer size,
-                      @RequestBody HospitalSetQueryVo hospitalSetQueryVo)//由于前端传来的使json数据用@RequestBody,VO对象用于前端和Controller层交互
+                      @RequestBody HospitalSetQueryVo hospitalSetQueryVo)//由于前端传来的是json数据用@RequestBody,VO对象用于前端和Controller层交互
     {
         //设置分页信息
         //此时使用HospitalSet,因为此时要进行的是数据库的搜索
@@ -115,7 +113,6 @@ public class HospitalSetController {
         List<HospitalSet> list = hospitalSetService.list();
         log.info("result ="+list.toString());
         return R.ok().data("items",list);
-
     }
 
     @DeleteMapping("/deleteById/{id}")
@@ -126,4 +123,3 @@ public class HospitalSetController {
         return R.ok();
     }
 }
-
