@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author: 拿破仑
@@ -23,6 +23,84 @@ public class AppTest {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    //分页查询
+    @Test
+    public void testPage(){
+        //前端传过来的信息
+        int pageNum = 1;
+        int size = 3;
+        //设置查询条件
+        Query query = new Query(Criteria.where("username").is("管志成"));
+        //获取total
+        long total = mongoTemplate.count(query, User.class);
+        //跳过查询
+        List<User> list = mongoTemplate.find(query.skip((pageNum-1)*size).limit(size), User.class);
+        //自己手动创造Total和row
+        Map<String,Object> map= new HashMap<>();
+        map.put("total",total);
+        map.put("row",list);
+        //返回给前端
+        //return map;
+    }
+
+    @Test
+    public void testQuery(){
+        //自动把查询结果封装到pojo中,数据库中比pojo中多余的字段不封装
+//        User byId = mongoTemplate.findById("556", User.class);
+//        System.out.println(byId);
+        //查询所有
+//        List<User> all = mongoTemplate.findAll(User.class);
+//        for (User user : all) {
+//            System.out.println("user = " + user);
+//        }
+        //带条件的查询
+//        Query query = new Query(Criteria.where("age").is(23));
+//        List<User> list = mongoTemplate.find(query, User.class);
+//        for (User user : list) {
+//            System.out.println("user = " + user);
+//        }
+        //模糊查询://此处的.*就相当于mysql中的%
+        String formet = String.format("%s%s%s", ".*", "管志成", ".*");
+        Pattern pattern = Pattern.compile(formet,Pattern.CASE_INSENSITIVE);//大小写不敏感
+        Query query = new Query(Criteria.where("username").regex(pattern));
+        List<User> list = mongoTemplate.find(query, User.class);
+        for (User user : list) {
+            System.out.println("user = " + user);
+        }
+    }
+
+    @Test
+    public void testUpdata(){
+        //upsert:有数据时进行修改,查不到时做添加
+//        Criteria criteria = new Criteria("username").is("管志成3");
+//        Query query = new Query(criteria);
+//        Update update = new Update();
+//        update.set("username","管志成100");
+//        mongoTemplate.upsert(query,update, User.class);
+
+        //updateFirst:只修改第一个
+        //updateMulti:所有的都修改
+//        Criteria criteria = new Criteria("gender").is(true);
+//        Query query = new Query(criteria);
+//        Update update = new Update();
+//        update.set("age",23);
+//        mongoTemplate.updateMulti(query,update, User.class);
+    }
+
+    @Test
+    public void testDelete(){
+        //and
+//        Query query = new Query(Criteria.where("username").is("人类").and("gender").is(true));
+//        DeleteResult remove = mongoTemplate.remove(query, User.class);
+//        System.out.println("remove = " + remove);
+        //or
+//        Criteria criteria = new Criteria();
+//        criteria.orOperator(Criteria.where("_id").is("1002"),Criteria.where("username").is("管志成1"));
+//        Query query = new Query(criteria);
+//        DeleteResult remove = mongoTemplate.remove(query,User.class);
+//        System.out.println("remove = " + remove);
+    }
+
     //测试新增:
     //1.insert可以用来新增,不能对主键重复的值进行修改
     //2.save不仅可以用来新增还可以用来对主键重复的修改数据,使用save修改时,是覆盖式的修改,要想保证其他数据不变,需要先查再改
@@ -32,7 +110,7 @@ public class AppTest {
 
         User user1 = new User();
         user1.setPid("1");
-        user1.setName("管志成1");
+        user1.setUsername("管志成1");
         mongoTemplate.save(user1);
     }
 
@@ -40,7 +118,7 @@ public class AppTest {
     @Test
     public void testSaveToUpData(){
         User byId = mongoTemplate.findById("2", User.class);
-        byId.setName("管志成3");
+        byId.setUsername("管志成3");
         mongoTemplate.save(byId);
 
     }

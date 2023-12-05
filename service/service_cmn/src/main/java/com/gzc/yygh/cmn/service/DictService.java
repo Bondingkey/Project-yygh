@@ -21,6 +21,5 @@ public interface DictService extends IService<Dict> {
 
     void upload(MultipartFile file) throws IOException;
 
-
     List getChildListByPid(Long pid);
 }

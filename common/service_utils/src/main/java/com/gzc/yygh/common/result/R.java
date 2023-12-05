@@ -1,13 +1,9 @@
 package com.gzc.yygh.common.result;
 
-import io.swagger.models.auth.In;
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author: 拿破仑
