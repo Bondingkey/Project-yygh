@@ -1,7 +1,7 @@
 package com.gzc.yygh.hosp;
 
 import com.gzc.yygh.hosp.pojo.User;
-import com.gzc.yygh.hosp.repostitry.UserRepository;
+import com.gzc.yygh.hosp.repostitry.HospRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +22,7 @@ import java.util.List;
 public class ReportoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private HospRepository userRepository;
 
 
     @Test
