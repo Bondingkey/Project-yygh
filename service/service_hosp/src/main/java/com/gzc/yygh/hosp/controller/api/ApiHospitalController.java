@@ -1,4 +1,4 @@
-package com.gzc.yygh.hosp.controller;
+package com.gzc.yygh.hosp.controller.api;
 
 import com.gzc.yygh.common.error.YyghError;
 import com.gzc.yygh.common.utils.MD5;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.font.TextHitInfo;
 import java.util.Map;
 
 /**
@@ -24,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/hosp")
-public class HospitalController {
+public class ApiHospitalController {
 
     @Autowired
     private HospService hospService;

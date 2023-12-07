@@ -10,4 +10,6 @@ public interface DepartmentService {
 
     Page<Department> getDepartmentPage(Map<String, Object> objectMap);
 
+    void remove(Map<String, Object> objectMap);
+
 }

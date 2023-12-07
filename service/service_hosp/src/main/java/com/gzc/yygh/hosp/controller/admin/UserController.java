@@ -1,4 +1,4 @@
-package com.gzc.yygh.hosp.controller;
+package com.gzc.yygh.hosp.controller.admin;
 
 import com.gzc.yygh.common.result.R;
 import com.gzc.yygh.model.acl.User;

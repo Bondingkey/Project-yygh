@@ -272,7 +272,7 @@ public class ApiServiceImpl implements ApiService {
                 throw new YyghException(respone.getString("message"), 201);
             }
         }
-        return false;
+        return true;
     }
 
     @Override

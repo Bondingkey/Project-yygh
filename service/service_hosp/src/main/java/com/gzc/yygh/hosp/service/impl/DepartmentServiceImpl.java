@@ -66,4 +66,15 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return all;
     }
+
+    @Override
+    public void remove(Map<String, Object> objectMap) {
+        String hoscode = (String) objectMap.get("hoscode");
+        String depcode = (String) objectMap.get("depcode");
+
+        //先查询后删除
+        Department byHoscodeAndDepcode = departmentRepository.findByHoscodeAndDepcode(hoscode, depcode);
+        departmentRepository.deleteById(byHoscodeAndDepcode.getId());
+
+    }
 }

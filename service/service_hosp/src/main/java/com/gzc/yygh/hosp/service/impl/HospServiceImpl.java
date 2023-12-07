@@ -8,9 +8,12 @@ import com.gzc.yygh.hosp.repostitry.HospRepository;
 import com.gzc.yygh.hosp.service.HospService;
 import com.gzc.yygh.model.hosp.Hospital;
 import com.gzc.yygh.model.hosp.HospitalSet;
+import com.gzc.yygh.vo.hosp.HospitalQueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -72,5 +75,35 @@ public class HospServiceImpl implements HospService {
     @Override
     public Hospital getHospByHospCode(String hoscode) {
         return hospRepository.findByHoscode(hoscode);
+    }
+
+    @Override
+    public Page getHospList(Integer pageNum, Integer pageSize, HospitalQueryVo hospitalQueryVo) {
+        //查询信息
+        Hospital hospital = new Hospital();
+        if (!StringUtils.isEmpty(hospitalQueryVo.getHosname())){
+            hospital.setHosname(hospitalQueryVo.getHosname());
+        }
+        if (!StringUtils.isEmpty(hospitalQueryVo.getProvinceCode())){
+            hospital.setProvinceCode(hospitalQueryVo.getProvinceCode());
+        }
+        if (!StringUtils.isEmpty(hospitalQueryVo.getCityCode())){
+            hospital.setCityCode(hospitalQueryVo.getCityCode());
+        }
+        //设置模糊查询
+        ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
+                //.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) //改变默认字符串匹配方式：模糊查询
+                .withMatcher("hosname", ExampleMatcher.GenericPropertyMatcher.of(ExampleMatcher.StringMatcher.CONTAINING))
+                .withIgnoreCase(true); //改变默认大小写忽略方式：忽略大小写
+
+        Example<Hospital> of = Example.of(hospital,matcher);
+        //分页信息
+        PageRequest page = PageRequest.of(pageNum-1, pageSize, Sort.by("createTime").ascending());
+        //需要查询信息和分页信息
+        Page<Hospital> all = hospRepository.findAll(of, page);
+
+
+
+        return all;
     }
 }

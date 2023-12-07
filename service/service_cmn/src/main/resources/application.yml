@@ -5,7 +5,11 @@ server:
 spring:
   application:
     name: service-cmn
-#mysql数据库连接
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  #mysql数据库连接
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: GUAN0310

@@ -11,6 +11,10 @@ spring:
   #微服务名字
   application:
     name: service-hosp
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
   #mysql数据库连接
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

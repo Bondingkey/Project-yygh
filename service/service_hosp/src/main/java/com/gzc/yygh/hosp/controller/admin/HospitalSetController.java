@@ -1,4 +1,4 @@
-package com.gzc.yygh.hosp.controller;
+package com.gzc.yygh.hosp.controller.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
