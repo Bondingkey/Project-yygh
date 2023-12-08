@@ -2,7 +2,9 @@ package com.gzc.yygh.hosp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.gzc.yygh.client.DictFeignClient;
 import com.gzc.yygh.common.error.YyghError;
+import com.gzc.yygh.enums.DictEnum;
 import com.gzc.yygh.hosp.mapper.HospitalSetMapper;
 import com.gzc.yygh.hosp.repostitry.HospRepository;
 import com.gzc.yygh.hosp.service.HospService;
@@ -33,6 +35,9 @@ public class HospServiceImpl implements HospService {
 
     @Autowired
     private HospitalSetMapper HospitalSetMapper;
+
+    @Autowired
+    private DictFeignClient dictFeignClient;
 
     @Override
     public void insert(Map<String, Object> objectMap) {
@@ -102,8 +107,27 @@ public class HospServiceImpl implements HospService {
         //需要查询信息和分页信息
         Page<Hospital> all = hospRepository.findAll(of, page);
 
-
+        //遍历修改编号为对应的文字
+        all.getContent().stream().forEach(item -> {
+            this.hospSwitch(item);
+        });
 
         return all;
+    }
+
+    private void hospSwitch(Hospital hosp){
+        String hostype = hosp.getHostype();
+        String provinceCode = hosp.getProvinceCode();
+        String cityCode = hosp.getCityCode();
+        String districtCode = hosp.getDistrictCode();
+
+        //调用远程微服务转化
+        String provinceCodeValue = dictFeignClient.getNameByValue(Long.parseLong(provinceCode));
+        String cityCodeValue = dictFeignClient.getNameByValue(Long.parseLong(cityCode));
+        String districtCodeValue = dictFeignClient.getNameByValue(Long.parseLong(districtCode));
+        String hospLevel = dictFeignClient.getNameByValueAndCode(DictEnum.HOSTYPE.getDictCode(), Long.parseLong(hostype));
+
+        hosp.getParam().put("hostypeString",hospLevel);
+        hosp.getParam().put("fullAddress",provinceCodeValue+cityCodeValue+districtCodeValue+hosp.getAddress());
     }
 }

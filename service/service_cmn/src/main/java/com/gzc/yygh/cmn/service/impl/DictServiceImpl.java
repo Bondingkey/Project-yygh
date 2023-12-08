@@ -76,4 +76,29 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         }
         return list;
     }
+
+    @Override
+    public String getNameByValue(Long value) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<Dict>();
+        queryWrapper.eq("value",value);
+        Dict dict = baseMapper.selectOne(queryWrapper);
+        if (dict!=null){
+            return dict.getName();
+        }
+        return null;
+    }
+
+    @Override
+    public String getNameByValueAndCode(String code, Long value) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<Dict>();
+        queryWrapper.eq("dict_code",code);
+        Dict dict = baseMapper.selectOne(queryWrapper);
+
+        QueryWrapper<Dict> queryWrapper1 = new QueryWrapper<Dict>();
+        queryWrapper1.eq("parent_id",dict.getId());
+        queryWrapper1.eq("value",value);
+        Dict dict1 = baseMapper.selectOne(queryWrapper1);
+
+        return dict1.getName();
+    }
 }

@@ -5,10 +5,7 @@ import com.gzc.yygh.hosp.service.HospService;
 import com.gzc.yygh.vo.hosp.HospitalQueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: 拿破仑
@@ -19,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/admin/hospital")
+@CrossOrigin  //局部解决跨域问题
 public class HospitalController {
 
     @Autowired

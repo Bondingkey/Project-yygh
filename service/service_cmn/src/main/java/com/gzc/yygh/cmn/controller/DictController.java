@@ -43,4 +43,17 @@ public class DictController {
         List list =  dictService.getChildListByPid(pid);
         return R.ok().data("items",list);
     }
+
+    //根据省市区编号查询省市区
+    @GetMapping("/{value}")
+    public String getNameByValue(@PathVariable("value") Long value){
+        return dictService.getNameByValue(value);
+    }
+
+    //根据医院等级编号查询医院等级
+    @GetMapping("/{code}/{value}")
+    public String getNameByValueAndCode(@PathVariable("code") String code,
+                                        @PathVariable("value") Long value){
+        return dictService.getNameByValueAndCode(code,value);
+    }
 }
