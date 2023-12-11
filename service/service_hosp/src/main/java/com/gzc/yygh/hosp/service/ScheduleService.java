@@ -2,6 +2,8 @@ package com.gzc.yygh.hosp.service;
 
 import org.springframework.data.domain.Page;
 import com.gzc.yygh.model.hosp.Schedule;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +19,9 @@ public interface ScheduleService{
     Page<Schedule> findlist(Map<String, Object> objectMap);
 
     void remove(Map<String, Object> objectMap);
+
+    Map<String, Object> page(Integer pageNum, Integer pageSize, String hoscode, String depcode);
+
+    List<Schedule> detail(String hoscode, String depcode, String workdata);
 
 }

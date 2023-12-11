@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/user")
-@CrossOrigin //浏览器使用axios调用服务器时会出现跨区问题,使用此注解可以局部解决(仅解决当前Controller)
+//@CrossOrigin //浏览器使用axios调用服务器时会出现跨区问题,使用此注解可以局部解决(仅解决当前Controller)
 public class UserController {
 
     //登录接口

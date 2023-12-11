@@ -15,4 +15,8 @@ public interface HospService {
 
     Page getHospList(Integer pageNum, Integer pageSize, HospitalQueryVo hospitalQueryVo);
 
+    void updateStatus(String id, Integer status);
+
+    Hospital getdetail(String id);
+
 }

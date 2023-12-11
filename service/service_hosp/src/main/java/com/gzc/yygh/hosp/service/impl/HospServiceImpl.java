@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author: 拿破仑
@@ -113,6 +114,24 @@ public class HospServiceImpl implements HospService {
         });
 
         return all;
+    }
+
+    //修改医院状态
+    @Override
+    public void updateStatus(String id, Integer status) {
+        if (status == 0 ||status ==1){
+            Hospital hospital = hospRepository.findById(id).get();
+            hospital.setStatus(status);
+            hospital.setUpdateTime(new Date());
+            hospRepository.save(hospital);
+        }
+    }
+
+    @Override
+    public Hospital getdetail(String id) {
+        Hospital hospital = hospRepository.findById(id).get();
+        this.hospSwitch(hospital);
+        return hospital;
     }
 
     private void hospSwitch(Hospital hosp){

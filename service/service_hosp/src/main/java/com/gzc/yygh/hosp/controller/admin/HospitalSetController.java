@@ -30,7 +30,7 @@ import java.util.Random;
 @Api(tags = "医院设置信息微服务") //当前微服务在Swagger中的说明信息
 @RequestMapping("/admin/hosp/hospitalSet")
 @Slf4j        //标注日志级别
-@CrossOrigin  //局部解决跨域问题
+//@CrossOrigin  //局部解决跨域问题
 public class HospitalSetController {
 
     @Autowired
