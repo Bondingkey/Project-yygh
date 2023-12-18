@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -96,6 +97,12 @@ public class HospServiceImpl implements HospService {
         if (!StringUtils.isEmpty(hospitalQueryVo.getCityCode())){
             hospital.setCityCode(hospitalQueryVo.getCityCode());
         }
+        if (!StringUtils.isEmpty(hospitalQueryVo.getHostype())){
+            hospital.setHostype(hospitalQueryVo.getHostype());
+        }
+        if (!StringUtils.isEmpty(hospitalQueryVo.getDistrictCode())){
+            hospital.setDistrictCode(hospitalQueryVo.getDistrictCode());
+        }
         //设置模糊查询
         ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
                 //.withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) //改变默认字符串匹配方式：模糊查询
@@ -130,6 +137,18 @@ public class HospServiceImpl implements HospService {
     @Override
     public Hospital getdetail(String id) {
         Hospital hospital = hospRepository.findById(id).get();
+        this.hospSwitch(hospital);
+        return hospital;
+    }
+
+    @Override
+    public List<Hospital> findByNameLike(String name) {
+        return hospRepository.findByHosnameLike(name);
+    }
+
+    @Override
+    public Hospital getHospDetail(String hoscode) {
+        Hospital hospital = hospRepository.findByHoscode(hoscode);
         this.hospSwitch(hospital);
         return hospital;
     }

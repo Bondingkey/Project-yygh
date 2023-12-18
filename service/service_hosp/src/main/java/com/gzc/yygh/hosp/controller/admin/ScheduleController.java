@@ -4,10 +4,7 @@ import com.gzc.yygh.common.result.R;
 import com.gzc.yygh.hosp.service.ScheduleService;
 import com.gzc.yygh.model.hosp.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/hosp/schedule")
+//@CrossOrigin  //局部解决跨域问题
 public class ScheduleController {
 
     @Autowired

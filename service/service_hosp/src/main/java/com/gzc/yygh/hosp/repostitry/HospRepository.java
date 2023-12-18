@@ -14,5 +14,7 @@ import java.util.List;
 public interface HospRepository extends MongoRepository<Hospital,String> {
 
     Hospital findByHoscode(String hoscode);
+
+    List<Hospital> findByHosnameLike(String name);
 }
 

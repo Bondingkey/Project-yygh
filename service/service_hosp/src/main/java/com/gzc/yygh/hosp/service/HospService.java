@@ -4,6 +4,7 @@ import com.gzc.yygh.model.hosp.Hospital;
 import com.gzc.yygh.vo.hosp.HospitalQueryVo;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Map;
 
 public interface HospService {
@@ -19,4 +20,7 @@ public interface HospService {
 
     Hospital getdetail(String id);
 
+    List<Hospital> findByNameLike(String name);
+
+    Hospital getHospDetail(String hoscode);
 }

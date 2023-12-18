@@ -1,0 +1,38 @@
+mybatis-plus:
+  mapper-locations: classpath:com/gzc/yygh/user/mapper/xml/*.xml
+server:
+  port: 8160
+spring:
+  application:
+    name: service-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: GUAN0310
+    url: jdbc:mysql://localhost:3306/yygh_user?serverTimezone=Asia/Shanghai
+    username: root
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  profiles:
+    active: dev
+  redis:
+    database: 0
+    host: 192.168.150.100
+    lettuce:
+      pool:
+        max-active: 20
+        max-idle: 5
+        max-wait: -1
+        min-idle: 0
+    port: 6379
+    timeout: 1800000
+
+weixin:
+  appid: wxed9954c01bb89b47
+  appscope: a7482517235173ddb4083788de60b90e
+  redirecturi: http://localhost:8160/user/userinfo/wx/callback
+

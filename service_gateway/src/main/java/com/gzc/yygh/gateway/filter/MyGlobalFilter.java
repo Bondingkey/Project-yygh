@@ -26,7 +26,7 @@ import java.util.List;
  * @Write software: IntelliJ IDEA
  * @Purpose: 在此处编辑
  */
-@Component
+//@Component
 public class MyGlobalFilter implements GlobalFilter, Ordered {
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();

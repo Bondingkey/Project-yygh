@@ -20,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/cmn")
+//@CrossOrigin  //局部解决跨域问题
 public class DictController {
 
     @Autowired

@@ -19,23 +19,23 @@ import java.util.List;
  * @Purpose: 在此处编辑
  */
 @SpringBootTest
-public class ReportoryTest {
+public class ReportoryTest {}
 
-    @Autowired
-    private HospRepository userRepository;
+//    @Autowired
+//    private HospRepository userRepository;
 
 
-    @Test
-    public void testMyfind(){
-        List<User> byName = userRepository.findByUsernameLikeAndGender("管志成",false);
-        for (User user : byName) {
-            System.out.println("user = " + user);
-        }
-    }
+//    @Test
+//    public void testMyfind(){
+//        List<User> byName = userRepository.findByUsernameLikeAndGender("管志成",false);
+//        for (User user : byName) {
+//            System.out.println("user = " + user);
+//        }
+//    }
 
     //测试查询
-    @Test
-    public void testQuery(){
+//    @Test
+//    public void testQuery(){
         //测试根据id查询
 //        Optional<User> byId = userRepository.findById("54");
 //        User user = byId.get();
@@ -65,57 +65,57 @@ public class ReportoryTest {
 //        }
         //分页查询
         //前端传来的分页信息
-        int PageNum = 1;
-        int PageSize = 3;
-
-        //分页条件
-        User user = new User();
-        user.setGender(true);
-        Example<User> userExample = Example.of(user);
-
-        //封装分页信息
-        Pageable pageable = PageRequest.of(PageNum,PageSize, Sort.by("pid").descending());
-
-        //查询
-        Page<User> allpage = userRepository.findAll(userExample, pageable);
-        System.out.println("总数"+allpage.getTotalElements());
-        System.out.println("总页数"+allpage.getTotalPages());
-        System.out.println("当前页列表数据");
-        List<User> content = allpage.getContent();
-        for (User user1 : content) {
-            System.out.println("user1 = " + user1);
-        }
-    }
+//        int PageNum = 1;
+//        int PageSize = 3;
+//
+//        //分页条件
+//        User user = new User();
+//        user.setGender(true);
+//        Example<User> userExample = Example.of(user);
+//
+//        //封装分页信息
+//        Pageable pageable = PageRequest.of(PageNum,PageSize, Sort.by("pid").descending());
+//
+//        //查询
+//        Page<User> allpage = userRepository.findAll(userExample, pageable);
+//        System.out.println("总数"+allpage.getTotalElements());
+//        System.out.println("总页数"+allpage.getTotalPages());
+//        System.out.println("当前页列表数据");
+//        List<User> content = allpage.getContent();
+//        for (User user1 : content) {
+//            System.out.println("user1 = " + user1);
+//        }
+//    }
 
     //测试添加
-    @Test
-    public void testInsert(){
-        //userRepository.insert(new User("管志成1","46",true,new Date()));//只能添加不能修改
-        //userRepository.save(new User("管志成11","47",true,new Date()));
-
-        //批量新增
-        List<User> userList = new ArrayList<>();
-        userList.add(new User("管志成1","52",true,new Date()));
-        userList.add(new User("管志成1","53",true,new Date()));
-        userList.add(new User("管志成1","54",true,new Date()));
-        userList.add(new User("管志成1","55",true,new Date()));
-        userRepository.saveAll(userList);
-    }
+//    @Test
+//    public void testInsert(){
+//        //userRepository.insert(new User("管志成1","46",true,new Date()));//只能添加不能修改
+//        //userRepository.save(new User("管志成11","47",true,new Date()));
+//
+//        //批量新增
+//        List<User> userList = new ArrayList<>();
+//        userList.add(new User("管志成1","52",true,new Date()));
+//        userList.add(new User("管志成1","53",true,new Date()));
+//        userList.add(new User("管志成1","54",true,new Date()));
+//        userList.add(new User("管志成1","55",true,new Date()));
+//        userRepository.saveAll(userList);
+//    }
 
     //测试删除
-    @Test
-    public void testDelete(){
-        //userRepository.deleteById("556");
-        //userRepository.delete(new User("管志成1","55",true,new Date()));//本质还是根据id删,没有id属性报错
-    }
-
-    //测试修改:直接改是覆盖式的修改,最好是先查后改
-    @Test
-    public void testUpdate(){
-        //直接修改:覆盖式修改
-        User user = new User();
-        user.setPid("54");
-        user.setUsername("哈哈哈");
-        userRepository.save(user);
-    }
-}
+//    @Test
+//    public void testDelete(){
+//        //userRepository.deleteById("556");
+//        //userRepository.delete(new User("管志成1","55",true,new Date()));//本质还是根据id删,没有id属性报错
+//    }
+//
+//    //测试修改:直接改是覆盖式的修改,最好是先查后改
+//    @Test
+//    public void testUpdate(){
+//        //直接修改:覆盖式修改
+//        User user = new User();
+//        user.setPid("54");
+//        user.setUsername("哈哈哈");
+//        userRepository.save(user);
+//    }
+//}
